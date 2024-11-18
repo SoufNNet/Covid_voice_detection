@@ -64,5 +64,3 @@ Le code produit :
 - scikit-learn
 - matplotlib et seaborn (pour les visualisations)
 
-## Auteur
-[Votre nom]

@@ -13,10 +13,7 @@ from tqdm import tqdm
 import tarfile
 
 def extract_tar(tar_path, extract_path):
-    """
-    Extracts tar file and handles nested directories only if not already extracted
-    Returns the extraction path
-    """
+
     date = os.path.basename(tar_path).split('_')[0]
     expected_csv = os.path.join(extract_path, f"{date}.csv")
     
@@ -83,7 +80,7 @@ class CoswaraProcessor:
             return [], [], []
             
         metadata_df = pd.read_csv(metadata_path)
-        # Mélanger aléatoirement les données
+       
         metadata_df = metadata_df.sample(frac=1, random_state=42)
         
         extract_path = os.path.join(date_folder, "extracted")
@@ -284,12 +281,12 @@ def main():
     model = create_model(input_shapes)
     model.summary()
     
-    # Augmenter le nombre d'époques car nous avons moins de données
+    
     history = model.fit(
         train_features,
         train_labels,
         validation_split=0.2,
-        epochs=20,  # Augmenté de 10 à 20
+        epochs=20,  
         batch_size=8,
         callbacks=[
             tf.keras.callbacks.EarlyStopping(
@@ -306,7 +303,7 @@ def main():
         ]
     )
 
-    # Evaluate and save results
+ 
     predictions = model.predict(test_features) > 0.5
     
     os.makedirs('results', exist_ok=True)
